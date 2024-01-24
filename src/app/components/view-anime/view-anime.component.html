@@ -1,0 +1,25 @@
+<p>view-anime works!</p>
+
+<div *ngIf="animeData$ | async as animeData">
+  <div *ngFor="let anime of animeData.data">
+    {{ anime.title }}
+  </div>
+</div>
+
+
+<div>
+  <p>Search Anime Here</p>
+  <input [(ngModel)]="searchTerm"/>
+  <button (click)="searchAnimeByName(this.searchTerm)">Search By name</button>
+  <select [(ngModel)]="selectedOption" (change)="onGenreSelect()">
+    <option>Select an option</option>
+    <option *ngFor="let genre of (genreData$ | async)?.data" [value]="genre.name">
+      {{ genre.name }}
+    </option>
+  </select>
+</div>
+
+<app-autocomplete></app-autocomplete>
+
+<h2>Random Selected Anime</h2>
+<p>Anime Name:</p>
